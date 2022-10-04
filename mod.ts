@@ -14,6 +14,8 @@ export const tryPipe = R.pipeWith((fn, r) =>
 	r instanceof Error ? r : trycatch(() => fn(r))
 );
 
+export const asyncTryPipe = R.pipeWith((fn, r) => Promise.resolve(r).catch(e => e).then(e => e instanceof Error ? e : fn(e)));
+
 export const nullPipe = R.pipeWith((fn, r) =>
 	r === null || r === undefined ? r : fn(r)
 );
